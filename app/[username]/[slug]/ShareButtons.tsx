@@ -28,3 +28,4 @@ export default function ShareButtons({ url }: { url: string }) {
     </div>
   );
 }
+
