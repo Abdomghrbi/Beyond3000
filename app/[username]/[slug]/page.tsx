@@ -101,7 +101,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
         </h1>
 
         <div className="flex items-center gap-3 mb-8 pb-8 border-b border-gray-100">
-          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-lg">
+          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-lg font-bold">
             {profile.display_name?.charAt(0) || profile.username.charAt(0)}
           </div>
           <div>
@@ -123,7 +123,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
-        <ShareButtons url={articleUrl} title={article.title} />
+        <ShareButtons url={articleUrl} />
       </article>
     </div>
   );
