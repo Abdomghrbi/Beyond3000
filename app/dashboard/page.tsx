@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { deleteArticle } from "./actions";
+import CopyLinkButton from "../components/CopyLinkButton";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -36,7 +37,6 @@ export default async function DashboardPage() {
               "use server";
               const supabase = await createClient();
               await supabase.auth.signOut();
-              redirect("/");
             }}>
               <button type="submit" className="text-sm text-red-600 hover:text-red-700">
                 خروج
@@ -64,58 +64,67 @@ export default async function DashboardPage() {
 
         {articles && articles.length > 0 ? (
           <div className="space-y-4">
-            {articles.map((article) => (
-              <div
-                key={article.id}
-                className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-start justify-between gap-4"
-              >
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-lg font-semibold text-gray-900 truncate">
-                      {article.title}
-                    </h3>
-                    {!article.published && (
-                      <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs rounded-full">
-                        مسودة
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-gray-500 mb-2">
-                    {new Date(article.created_at).toLocaleDateString("ar-SA")}
-                  </p>
-                  <p className="text-gray-600 text-sm line-clamp-2">
-                    {article.excerpt}
-                  </p>
-                  {article.published && (
-                    <p className="text-xs text-gray-400 mt-2">
-                      الرابط: /{profile?.username}/{article.slug}
+            {articles.map((article) => {
+              const articleUrl = `https://linkedin-articles-six.vercel.app/${profile?.username}/${article.slug}`;
+              return (
+                <div
+                  key={article.id}
+                  className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-start justify-between gap-4"
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="text-lg font-semibold text-gray-900 truncate">
+                        {article.title}
+                      </h3>
+                      {!article.published && (
+                        <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs rounded-full">
+                          مسودة
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-sm text-gray-500 mb-2">
+                      {new Date(article.created_at).toLocaleDateString("ar-SA")}
                     </p>
-                  )}
+                    <p className="text-gray-600 text-sm line-clamp-2">
+                      {article.excerpt}
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-2 items-end">
+                    {article.published && (
+                      <>
+                        <Link
+                          href={`/${profile?.username}/${article.slug}`}
+                          target="_blank"
+                          className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                        >
+                          عرض
+                        </Link>
+                        <CopyLinkButton url={articleUrl} />
+                        <a
+                          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-blue-700 hover:text-blue-800 font-medium"
+                        >
+                          LinkedIn
+                        </a>
+                      </>
+                    )}
+                    <form action={async () => {
+                      "use server";
+                      await deleteArticle(article.id);
+                    }}>
+                      <button
+                        type="submit"
+                        className="text-sm text-red-600 hover:text-red-700 font-medium"
+                      >
+                        حذف
+                      </button>
+                    </form>
+                  </div>
                 </div>
-                <div className="flex flex-col gap-2">
-                  {article.published && (
-                    <Link
-                      href={`/${profile?.username}/${article.slug}`}
-                      target="_blank"
-                      className="text-sm text-blue-600 hover:text-blue-700 font-medium"
-                    >
-                      عرض
-                    </Link>
-                  )}
-                  <form action={async () => {
-                    "use server";
-                    await deleteArticle(article.id);
-                  }}>
-                    <button
-                      type="submit"
-                      className="text-sm text-red-600 hover:text-red-700 font-medium"
-                    >
-                      حذف
-                    </button>
-                  </form>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 text-center">
