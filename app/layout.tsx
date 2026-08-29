@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "LinkedIn Articles — اكتب وشارك مقالاتك",
-  description: "منصة لنشر المقالات الطويلة ومشاركتها على لينكدان بدون حدود",
+  title: "Beyond3000 — اكتب وشارك بلا حدود",
+  description: "منصة لنشر المقالات الطويلة ومشاركتها على لينكدان",
 };
 
 export default function RootLayout({
