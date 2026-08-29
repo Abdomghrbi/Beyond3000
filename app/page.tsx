@@ -3,7 +3,6 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navbar */}
       <nav className="bg-white border-b border-gray-200 px-4 py-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold text-blue-600">
@@ -26,7 +25,6 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Hero */}
       <main className="max-w-5xl mx-auto px-4 py-16 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
           اكتب مقالاتك الطويلة<br />
@@ -52,7 +50,6 @@ export default function HomePage() {
         </div>
       </main>
 
-      {/* Features */}
       <section className="max-w-5xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-white p-6 rounded-2xl shadow-sm">
@@ -66,14 +63,14 @@ export default function HomePage() {
             <div className="text-3xl mb-4">🔗</div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">رابط جميل</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
-              كل مقالة لها رابط فريد: yourname.com/username/article-slug
+              كل مقالة لها رابط فريد: beyond3000.vercel.app/username/article-slug
             </p>
           </div>
           <div className="bg-white p-6 rounded-2xl shadow-sm">
             <div className="text-3xl mb-4">📱</div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">متوافق مع لينكدان</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
-              عند مشاركة الرابط على لينكدان، يظهر preview احترافي.
+              عند مشاركة الرابط على لينكدان، يظهر بشكل احترافي.
             </p>
           </div>
         </div>
