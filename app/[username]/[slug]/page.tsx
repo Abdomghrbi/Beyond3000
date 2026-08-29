@@ -76,7 +76,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
       <nav className="border-b border-gray-200 px-4 py-3 sticky top-0 bg-white/95 backdrop-blur z-10">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-blue-600">
-            LinkedIn Articles
+            Beyond3000
           </Link>
           <Link
             href={`/${profile.username}`}
