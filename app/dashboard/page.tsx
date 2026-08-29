@@ -65,7 +65,7 @@ export default async function DashboardPage() {
         {articles && articles.length > 0 ? (
           <div className="space-y-4">
             {articles.map((article) => {
-              const articleUrl = `https://linkedin-articles-six.vercel.app/${profile?.username}/${article.slug}`;
+              const articleUrl = `https://beyond3000.vercel.app/${profile?.username}/${article.slug}`;
               return (
                 <div
                   key={article.id}
