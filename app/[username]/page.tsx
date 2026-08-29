@@ -6,7 +6,7 @@ import CopyLinkButton from "../components/CopyLinkButton";
 export async function generateMetadata({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
   return {
-    title: `${username} — LinkedIn Articles`,
+    title: `${username} — Beyond3000`,
   };
 }
 
@@ -36,7 +36,7 @@ export default async function UserPage({ params }: { params: Promise<{ username:
       <nav className="bg-white border-b border-gray-200 px-4 py-3">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-blue-600">
-            LinkedIn Articles
+            Beyond3000
           </Link>
           <Link href="/login" className="text-sm text-gray-600 hover:text-gray-900">
             تسجيل الدخول
