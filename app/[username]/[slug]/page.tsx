@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ username:
       title: article.title,
       description: article.excerpt,
       type: "article",
-      url: `https://linkedin-articles-six.vercel.app/${username}/${slug}`,
+      url: `https://beyond3000.vercel.app/${username}/${slug}`,
       images: article.cover_image ? [{ url: article.cover_image }] : [],
       authors: [profile.display_name || profile.username],
       publishedTime: article.created_at,
@@ -69,7 +69,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
 
   if (!article) notFound();
 
-  const articleUrl = `https://linkedin-articles-six.vercel.app/${username}/${slug}`;
+  const articleUrl = `https://beyond3000.vercel.app/${username}/${slug}`;
 
   return (
     <div className="min-h-screen bg-white">
