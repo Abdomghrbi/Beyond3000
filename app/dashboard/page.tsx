@@ -106,7 +106,7 @@ export default async function DashboardPage() {
                           rel="noopener noreferrer"
                           className="text-sm text-blue-700 hover:text-blue-800 font-medium"
                         >
-                          LinkedIn
+                          💼 LinkedIn
                         </a>
                       </>
                     )}
