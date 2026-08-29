@@ -45,7 +45,6 @@ export default async function UserPage({ params }: { params: Promise<{ username:
       </nav>
 
       <main className="max-w-3xl mx-auto px-4 py-8">
-        {/* Profile Header */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-2xl font-bold">
@@ -63,13 +62,12 @@ export default async function UserPage({ params }: { params: Promise<{ username:
           )}
         </div>
 
-        {/* Articles */}
         <h2 className="text-lg font-bold text-gray-900 mb-4">المقالات</h2>
 
         {articles && articles.length > 0 ? (
           <div className="space-y-4">
             {articles.map((article) => {
-              const articleUrl = `https://linkedin-articles-six.vercel.app/${profile.username}/${article.slug}`;
+              const articleUrl = `https://beyond3000.vercel.app/${profile.username}/${article.slug}`;
               return (
                 <div
                   key={article.id}
