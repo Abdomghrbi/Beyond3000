@@ -24,42 +24,36 @@ export default async function HomePage() {
   if (user) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
-          <div className="flex flex-col gap-6 md:flex-row">
-            <AuthSidebar displayName={displayName} username={username} />
+        <AuthSidebar displayName={displayName} username={username} />
 
-            <main className="flex-1">
-              <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 md:p-12">
-                <div className="max-w-3xl">
-                  <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
-                    أنت الآن مسجل دخول
-                  </span>
-                  <h1 className="mt-4 text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                    ابدأ من هنا وادِر مقالاتك بسهولة
-                  </h1>
-                  <p className="mt-5 text-lg text-gray-600 leading-relaxed">
-                    يمكنك الانتقال إلى المقالات، مراجعة حسابك، أو إنشاء محتوى جديد مباشرة من القائمة الجانبية.
-                  </p>
+        <main className="mx-auto max-w-5xl px-4 py-16 pt-24 text-center">
+          <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 md:p-12 text-right">
+            <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+              أنت الآن مسجل دخول
+            </span>
+            <h1 className="mt-4 text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+              ابدأ من هنا وادِر مقالاتك بسهولة
+            </h1>
+            <p className="mt-5 text-lg text-gray-600 leading-relaxed">
+              يمكنك الانتقال إلى المقالات، مراجعة حسابك، أو إنشاء محتوى جديد مباشرة من القائمة الجانبية.
+            </p>
 
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <Link
-                      href="/dashboard"
-                      className="rounded-xl bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 transition"
-                    >
-                      عرض المقالات
-                    </Link>
-                    <Link
-                      href="/account"
-                      className="rounded-xl border border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 hover:border-gray-400 hover:bg-gray-50 transition"
-                    >
-                      صفحة الحساب
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </main>
+            <div className="mt-8 flex flex-wrap gap-3 justify-start">
+              <Link
+                href="/dashboard"
+                className="rounded-xl bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 transition"
+              >
+                عرض المقالات
+              </Link>
+              <Link
+                href="/account"
+                className="rounded-xl border border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 hover:border-gray-400 hover:bg-gray-50 transition"
+              >
+                صفحة الحساب
+              </Link>
+            </div>
           </div>
-        </div>
+        </main>
       </div>
     );
   }
