@@ -46,14 +46,14 @@ export default async function DashboardPage() {
       <main className="mx-auto max-w-6xl px-4 py-16 pt-24 md:px-6">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-1xl font-bold text-gray-900">
               مرحباً بك {profile?.display_name || profile?.username}
             </h1>
             <p className="text-gray-600 mt-1">إدارة مقالاتك</p>
           </div>
           <Link
             href="/dashboard/new"
-            className="px-3 py-2 bg-blue-500 hover:bg-blue-700 text-white font-medium rounded-lg transition"
+            className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-medium rounded-lg transition"
           >
             + مقالة جديدة
           </Link>
