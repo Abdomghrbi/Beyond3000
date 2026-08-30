@@ -31,6 +31,8 @@ export default async function UserPage({ params }: { params: Promise<{ username:
     .eq("published", true)
     .order("created_at", { ascending: false });
 
+  const linkedinProfileUrl = "https://www.linkedin.com/in/abdullrahmanalmaghrebi";
+
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white border-b border-gray-200 px-4 py-3">
@@ -98,12 +100,12 @@ export default async function UserPage({ params }: { params: Promise<{ username:
                     <div className="flex items-center gap-3">
                       <CopyLinkButton url={articleUrl} />
                       <a
-                        href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`}
+                        href={linkedinProfileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-blue-600 hover:text-blue-700 font-medium"
                       >
-                        LinkedIn
+                        اقترح تعديلاً
                       </a>
                     </div>
                   </div>
