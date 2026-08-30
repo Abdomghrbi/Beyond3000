@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createArticle } from "../actions";
 import Link from "next/link";
+import AuthSidebar from "../../components/AuthSidebar";
 
 export default function NewArticlePage() {
   const [error, setError] = useState<string | null>(null);
@@ -20,6 +21,8 @@ export default function NewArticlePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <AuthSidebar displayName="لوحة التحكم" />
+
       <nav className="bg-white border-b border-gray-200 px-4 py-3">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-blue-600">
@@ -31,7 +34,7 @@ export default function NewArticlePage() {
         </div>
       </nav>
 
-      <main className="max-w-3xl mx-auto px-4 py-8">
+      <main className="max-w-3xl mx-auto px-4 py-8 pt-16">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">مقالة جديدة</h1>
 
         <form action={handleSubmit} className="space-y-4">
