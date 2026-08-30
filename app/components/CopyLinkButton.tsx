@@ -9,9 +9,9 @@ export default function CopyLinkButton({ url }: { url: string }) {
   return (
     <button
       onClick={copy}
-      className="text-sm text-gray-500 hover:text-blue-600 font-medium transition"
+      className="text-sm text-gray-600 hover:text-blue-600 font-medium transition"
     >
-      📋 نسخ الرابط
+       نسخ الرابط
     </button>
   );
 }
