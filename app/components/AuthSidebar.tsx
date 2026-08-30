@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { signOutAction } from "./actions";
 import { Menu, X, Home, FileText, User, LogOut } from "lucide-react";
 
 export default function AuthSidebar({
@@ -14,7 +13,6 @@ export default function AuthSidebar({
   username?: string | null;
 }) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     if (open) {
@@ -27,14 +25,6 @@ export default function AuthSidebar({
       document.body.style.overflow = "";
     };
   }, [open]);
-
-  async function handleLogout() {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    setOpen(false);
-    router.replace("/");
-    router.refresh();
-  }
 
   return (
     <>
@@ -111,14 +101,15 @@ export default function AuthSidebar({
           </nav>
 
           <div className="mt-auto border-t border-gray-100 p-4">
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-700 transition hover:bg-red-100"
-            >
-              <LogOut size={18} />
-              <span>تسجيل الخروج</span>
-            </button>
+            <form action={signOutAction}>
+              <button
+                type="submit"
+                className="flex w-full items-center justify-center gap-2 rounded-2xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-700 transition hover:bg-red-100"
+              >
+                <LogOut size={18} />
+                <span>تسجيل الخروج</span>
+              </button>
+            </form>
           </div>
         </aside>
       </div>
