@@ -83,6 +83,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
 
   const articleSlug = article.slug || generateSlug(article.title);
   const articleUrl = `https://beyond3000.vercel.app/${username}/${articleSlug}`;
+  const avatarFallback = (profile.display_name || profile.username || "?").trim().charAt(0).toUpperCase();
 
   return (
     <div className="min-h-screen bg-white">
@@ -114,8 +115,16 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
         </h1>
 
         <div className="flex items-center gap-3 mb-8 pb-8 border-b border-gray-100">
-          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-lg font-bold">
-            {profile.display_name?.charAt(0) || profile.username.charAt(0)}
+          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center overflow-hidden text-lg font-bold">
+            {profile.avatar_url ? (
+              <img
+                src={profile.avatar_url}
+                alt={profile.display_name || profile.username}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <span>{avatarFallback}</span>
+            )}
           </div>
           <div>
             <p className="font-medium text-gray-900">
