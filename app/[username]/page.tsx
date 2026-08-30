@@ -40,6 +40,7 @@ export default async function UserPage({ params }: { params: Promise<{ username:
     .order("created_at", { ascending: false });
 
   const linkedinProfileUrl = "https://www.linkedin.com/in/abdullrahmanalmaghrebi";
+  const avatarFallback = (profile.display_name || profile.username || "?").trim().charAt(0).toUpperCase();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,8 +58,16 @@ export default async function UserPage({ params }: { params: Promise<{ username:
       <main className="max-w-3xl mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-2xl font-bold">
-              {profile.display_name?.charAt(0) || profile.username.charAt(0)}
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center overflow-hidden text-2xl font-bold">
+              {profile.avatar_url ? (
+                <img
+                  src={profile.avatar_url}
+                  alt={profile.display_name || profile.username}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <span>{avatarFallback}</span>
+              )}
             </div>
             <div>
               <h1 className="text-2xl font-bold text-gray-900">
