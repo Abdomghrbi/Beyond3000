@@ -106,7 +106,7 @@ export default async function DashboardPage() {
                           rel="noopener noreferrer"
                           className="text-sm text-blue-700 hover:text-blue-800 font-medium"
                         >
-                          💼 LinkedIn
+                          LinkedIn
                         </a>
                       </>
                     )}
@@ -128,12 +128,12 @@ export default async function DashboardPage() {
           </div>
         ) : (
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 text-center">
-            <p className="text-gray-500 mb-4">ما عندك مقالات حالياً</p>
+            <p className="text-gray-500 mb-4"> ليس لديك مقالات حالياً</p>
             <Link
               href="/dashboard/new"
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition"
             >
-              اكتب أول مقالة
+              اكتب مقالة
             </Link>
           </div>
         )}
