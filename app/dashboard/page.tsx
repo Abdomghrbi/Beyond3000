@@ -49,7 +49,7 @@ export default async function DashboardPage() {
             <h1 className="text-1xl font-bold text-gray-900">
               مرحباً بك {profile?.display_name || profile?.username}
             </h1>
-            <p className="text-gray-600 mt-1">إدارة مقالاتك</p>
+            <p className="text-gray-600 mt-1">مقالاتك</p>
           </div>
           <Link
             href="/dashboard/new"
