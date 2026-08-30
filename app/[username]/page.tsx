@@ -83,7 +83,7 @@ export default async function UserPage({ params }: { params: Promise<{ username:
                       <img
                         src={article.cover_image}
                         alt={article.title}
-                        className="w-full h-48 object-cover rounded-lg mb-4"
+                        className="w-full h-40 object-cover rounded-lg mb-4"
                       />
                     )}
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
