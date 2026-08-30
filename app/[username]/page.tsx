@@ -3,6 +3,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import CopyLinkButton from "../components/CopyLinkButton";
 
+function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .substring(0, 60);
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
   return {
@@ -69,14 +77,15 @@ export default async function UserPage({ params }: { params: Promise<{ username:
         {articles && articles.length > 0 ? (
           <div className="space-y-4">
             {articles.map((article) => {
-              const articleUrl = `https://beyond3000.vercel.app/${profile.username}/${article.slug}`;
+              const articleSlug = article.slug || generateSlug(article.title);
+              const articleUrl = `https://beyond3000.vercel.app/${profile.username}/${articleSlug}`;
               return (
                 <div
                   key={article.id}
                   className="bg-white rounded-xl shadow-sm border border-gray-100 p-5"
                 >
                   <Link
-                    href={`/${profile.username}/${article.slug}`}
+                    href={`/${profile.username}/${articleSlug}`}
                     className="block hover:opacity-90 transition"
                   >
                     {article.cover_image && (
