@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import ShareButtons from "./ShareButtons";
+import BottomActions from "./BottomActions";
 
 export async function generateMetadata({ params }: { params: Promise<{ username: string; slug: string }> }): Promise<Metadata> {
   const { username, slug } = await params;
@@ -122,8 +122,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
           className="prose prose-lg max-w-none text-gray-800 leading-relaxed"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
-
-        <ShareButtons url={articleUrl} />
+        
+        <BottomActions url={articleUrl} />
       </article>
     </div>
   );
