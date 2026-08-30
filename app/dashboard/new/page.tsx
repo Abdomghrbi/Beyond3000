@@ -26,7 +26,7 @@ export default function NewArticlePage() {
             LinkedIn Articles
           </Link>
           <Link href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900">
-            رجوع للوحة التحكم
+            لوحة التحكم
           </Link>
         </div>
       </nav>
@@ -34,7 +34,7 @@ export default function NewArticlePage() {
       <main className="max-w-3xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">مقالة جديدة</h1>
 
-        <form action={handleSubmit} className="space-y-6">
+        <form action={handleSubmit} className="space-y-4">
           {error && (
             <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">
               {error}
