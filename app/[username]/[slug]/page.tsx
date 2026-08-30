@@ -4,6 +4,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import BottomActions from "./BottomActions";
 
+function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .substring(0, 60);
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ username: string; slug: string }> }): Promise<Metadata> {
   const { username, slug } = await params;
   const supabase = await createClient();
@@ -16,15 +24,18 @@ export async function generateMetadata({ params }: { params: Promise<{ username:
 
   if (!profile) return { title: "غير موجود" };
 
-  const { data: article } = await supabase
+  const { data: articles } = await supabase
     .from("articles")
     .select("*")
     .eq("user_id", profile.id)
-    .eq("slug", slug)
     .eq("published", true)
-    .single();
+    .order("created_at", { ascending: false });
+
+  const article = articles?.find((item) => (item.slug || generateSlug(item.title)) === slug);
 
   if (!article) return { title: "غير موجود" };
+
+  const articleSlug = article.slug || generateSlug(article.title);
 
   return {
     title: article.title,
@@ -33,7 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ username:
       title: article.title,
       description: article.excerpt,
       type: "article",
-      url: `https://beyond3000.vercel.app/${username}/${slug}`,
+      url: `https://beyond3000.vercel.app/${username}/${articleSlug}`,
       images: article.cover_image ? [{ url: article.cover_image }] : [],
       authors: [profile.display_name || profile.username],
       publishedTime: article.created_at,
@@ -59,17 +70,19 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
 
   if (!profile) notFound();
 
-  const { data: article } = await supabase
+  const { data: articles } = await supabase
     .from("articles")
     .select("*")
     .eq("user_id", profile.id)
-    .eq("slug", slug)
     .eq("published", true)
-    .single();
+    .order("created_at", { ascending: false });
+
+  const article = articles?.find((item) => (item.slug || generateSlug(item.title)) === slug);
 
   if (!article) notFound();
 
-  const articleUrl = `https://beyond3000.vercel.app/${username}/${slug}`;
+  const articleSlug = article.slug || generateSlug(article.title);
+  const articleUrl = `https://beyond3000.vercel.app/${username}/${articleSlug}`;
 
   return (
     <div className="min-h-screen bg-white">
