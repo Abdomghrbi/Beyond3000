@@ -56,7 +56,7 @@ export default async function DashboardPage() {
           </div>
           <Link
             href="/dashboard/new"
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition"
+            className="px-4 py-2 bg-blue-300 hover:bg-blue-700 text-white font-medium rounded-lg transition"
           >
             + مقالة جديدة
           </Link>
