@@ -28,7 +28,7 @@ export default async function HomePage() {
 
         <main className="mx-auto max-w-5xl px-4 py-16 pt-24 text-center">
           <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 md:p-12 text-right">
-            <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+            <span className="inline-flex rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-blue-700">
               أنت الآن مسجل دخول
             </span>
             <h1 className="mt-4 text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
@@ -49,7 +49,7 @@ export default async function HomePage() {
                 href="/account"
                 className="rounded-xl border border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 hover:border-gray-400 hover:bg-gray-50 transition"
               >
-                صفحة الحساب
+              الحساب
               </Link>
             </div>
           </div>
@@ -89,20 +89,19 @@ export default async function HomePage() {
         </h1>
         <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
           لينكدان يحدك بـ 3000 حرف؟ أنشئ حسابك واكتب مقالاتك بدون قيود.
-          احصل على رابط جميل وشاركه مع متابعيك.
         </p>
         <div className="flex items-center justify-center gap-4">
           <Link
             href="/register"
             className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition text-lg"
           >
-            ابدأ الآن — مجاناً
+            ابدأ مجاناً
           </Link>
           <Link
             href="/login"
             className="px-8 py-3 bg-white border border-gray-300 hover:border-gray-400 text-gray-700 font-medium rounded-xl transition text-lg"
           >
-            لدي حساب
+            لديك حساب
           </Link>
         </div>
       </main>
@@ -114,13 +113,6 @@ export default async function HomePage() {
             <h3 className="text-lg font-bold text-gray-900 mb-2">كتابة حرة</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               اكتب بدون حدود للأحرف. مقالاتك تبقى ملكك بالكامل.
-            </p>
-          </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-            <div className="text-3xl mb-4">🔗</div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">رابط جميل</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              كل مقالة لها رابط فريد: beyond3000.vercel.app/username/article-slug
             </p>
           </div>
           <div className="bg-white p-6 rounded-2xl shadow-sm">
