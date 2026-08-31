@@ -106,10 +106,6 @@ export default function AccountProfileClient({
             </button>
           </div>
 
-          <p className="mt-3 text-xs text-gray-500">
-            ارفع صورة مباشرة من جهازك بصيغة JPG أو PNG أو WebP.
-          </p>
-
           {previewUrl && (
             <div className="mt-4 rounded-2xl border border-blue-200 bg-blue-50 p-3 text-right">
               <div className="flex items-center gap-3">
