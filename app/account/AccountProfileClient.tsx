@@ -22,9 +22,11 @@ export default function AccountProfileClient({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [showButtons, setShowButtons] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const uploadFormRef = useRef<HTMLFormElement>(null);
   const deleteFormRef = useRef<HTMLFormElement>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const avatarSrc = useMemo(() => resolveAvatarUrl(profile.avatar_url), [profile.avatar_url]);
   const avatarFallback = (profile.display_name || profile.username || email || "?")
@@ -37,8 +39,21 @@ export default function AccountProfileClient({
       if (previewUrl?.startsWith("blob:")) {
         URL.revokeObjectURL(previewUrl);
       }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     };
   }, [previewUrl]);
+
+  const handleAvatarClick = () => {
+    setShowButtons(true);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setShowButtons(false);
+    }, 5000);
+  };
 
   const handlePickAvatar = () => {
     fileInputRef.current?.click();
@@ -77,7 +92,11 @@ export default function AccountProfileClient({
 
       <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
         <section className="rounded-3xl bg-white border border-gray-200 shadow-sm p-6 text-center">
-          <div className="mx-auto flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-gray-100 ring-1 ring-gray-200">
+    
+          <div
+            onClick={handleAvatarClick}
+            className="mx-auto flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-gray-100 ring-2 ring-blue-500 ring-offset-2 ring-offset-white cursor-pointer transition hover:ring-blue-400"
+          >
             {avatarSrc ? (
               <img
                 src={avatarSrc}
@@ -89,7 +108,11 @@ export default function AccountProfileClient({
             )}
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+          <div
+            className={`mt-4 flex flex-wrap items-center justify-center gap-2 transition-all duration-300 ${
+              showButtons ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
+            }`}
+          >
             <button
               type="button"
               onClick={handlePickAvatar}
@@ -134,24 +157,24 @@ export default function AccountProfileClient({
                   onClick={handleUploadAvatar}
                   className="rounded-full bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700"
                 >
-                  رفع الصورة
+                  حفظ الصورة
                 </button>
               </div>
             </div>
           )}
 
-          <form ref={uploadFormRef} action={uploadAvatar} encType="multipart/form-data" className="hidden">
+          <form ref={uploadFormRef} action={uploadAvatar} className="hidden">
             <input
               ref={fileInputRef}
               type="file"
               name="avatar"
               accept="image/*"
-              className="hidden"
               onChange={handleFileChange}
             />
           </form>
-
           <form ref={deleteFormRef} action={deleteAvatar} className="hidden" />
+
+          
         </section>
 
         <section className="space-y-4">
