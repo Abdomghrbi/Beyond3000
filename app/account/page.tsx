@@ -195,10 +195,6 @@ export default async function AccountPage({
               <p className="text-sm text-gray-500">البريد الإلكتروني</p>
               <p className="mt-1 text-lg font-semibold text-gray-900 break-all">{user.email}</p>
             </div>
-            <div className="rounded-2xl bg-gray-50 p-5">
-              <p className="text-sm text-gray-500">الحالة</p>
-              <p className="mt-1 text-lg font-semibold text-gray-900">مسجل دخول</p>
-            </div>
           </div>
 
           {profile?.bio && (
