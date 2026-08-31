@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import BottomActions from "./BottomActions";
+import { resolveAvatarUrl } from "@/lib/avatar";
 
 function generateSlug(title: string): string {
   return title
@@ -83,6 +84,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
 
   const articleSlug = article.slug || generateSlug(article.title);
   const articleUrl = `https://beyond3000.vercel.app/${username}/${articleSlug}`;
+  const avatarSrc = resolveAvatarUrl(profile.avatar_url);
   const avatarFallback = (profile.display_name || profile.username || "?").trim().charAt(0).toUpperCase();
 
   return (
@@ -116,9 +118,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
 
         <div className="flex items-center gap-3 mb-8 pb-8 border-b border-gray-100">
           <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center overflow-hidden text-lg font-bold">
-            {profile.avatar_url ? (
+            {avatarSrc ? (
               <img
-                src={profile.avatar_url}
+                src={avatarSrc}
                 alt={profile.display_name || profile.username}
                 className="h-full w-full object-cover"
               />
