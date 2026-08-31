@@ -193,9 +193,7 @@ export default function AccountProfileClient({
             <div className="flex items-center justify-between gap-3">
               <div>
                 <h2 className="text-xl font-bold text-gray-900">تعديل الملف الشخصي</h2>
-                <p className="mt-1 text-sm text-gray-500">
-                  اضغط على زر تعديل لإظهار الحقول وتحديث الاسم أو النبذة.
-                </p>
+              
               </div>
               <button
                 type="button"
