@@ -52,11 +52,10 @@ export default async function AccountPage({
     <div className="min-h-screen bg-gray-50">
       <AuthSidebar displayName={displayName} username={profile?.username} />
 
-      <main className="mx-auto max-w-6xl px-4 py-16 pt-24 md:px-6">
+      <main className="mx-auto max-w-6xl px-4 py-16 md:px-6">
         <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 md:p-12">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div>
-              <p className="text-sm text-gray-500">قسم الحساب</p>
               <h1 className="mt-2 text-3xl font-bold text-gray-900">معلومات الحساب</h1>
             </div>
             {profile?.username && (
