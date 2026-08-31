@@ -28,7 +28,7 @@ export default async function HomePage() {
 
         <main className="mx-auto max-w-5xl px-4 py-16 pt-24 text-center">
           <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 md:p-12 text-right">
-            <span className="inline-flex rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-blue-700">
+            <span className="inline-flex rounded-full bg-green-200 px-3 py-1 text-sm font-medium text-green-700">
               أنت الآن مسجل دخول
             </span>
             <h1 className="mt-4 text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
