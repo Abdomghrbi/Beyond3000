@@ -58,7 +58,6 @@ export default function AuthSidebar({
         >
           <div className="flex items-start justify-between border-b border-gray-100 p-5">
             <div>
-              <p className="text-sm text-gray-500">مرحباً بك</p>
               <h2 className="mt-1 text-xl font-bold text-gray-900">{displayName}</h2>
               {username && <p className="text-sm text-gray-500 mt-1">@{username}</p>}
             </div>
