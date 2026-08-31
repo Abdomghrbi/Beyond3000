@@ -18,9 +18,10 @@ export default function AccountProfileClient({
   email: string | null;
   savedMessage?: string | null;
 }) {
+  
   const [editing, setEditing] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [previewOpen, setPreviewOpen] = useState(false);
+  const [showSaved, setShowSaved] = useState(!!savedMessage);const [previewOpen, setPreviewOpen] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const [showButtons, setShowButtons] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -33,6 +34,16 @@ export default function AccountProfileClient({
     .trim()
     .charAt(0)
     .toUpperCase();
+
+    useEffect(() => {
+    if (savedMessage) {
+      setShowSaved(true);
+      const timer = setTimeout(() => {
+        setShowSaved(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [savedMessage]);
 
   useEffect(() => {
     return () => {
@@ -84,8 +95,8 @@ export default function AccountProfileClient({
 
   return (
     <div className="space-y-6">
-      {savedMessage && (
-        <div className="rounded-2xl bg-green-50 px-4 py-3 text-sm font-medium text-green-700">
+      {showSaved && savedMessage && (
+        <div className="rounded-2xl bg-green-50 px-4 py-3 text-sm font-medium text-green-700 transition-opacity duration-500">
           {savedMessage}
         </div>
       )}
