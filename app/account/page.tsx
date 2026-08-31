@@ -77,7 +77,7 @@ export default async function AccountPage({
                 bio: profile?.bio,
                 avatar_url: profile?.avatar_url,
               }}
-              email={user.email}
+              email={user.email ?? null}
               savedMessage={savedMessage}
             />
           </div>
