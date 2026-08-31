@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import CopyLinkButton from "../components/CopyLinkButton";
+import { resolveAvatarUrl } from "@/lib/avatar";
 
 function generateSlug(title: string): string {
   return title
@@ -40,6 +41,7 @@ export default async function UserPage({ params }: { params: Promise<{ username:
     .order("created_at", { ascending: false });
 
   const linkedinProfileUrl = "https://www.linkedin.com/in/abdullrahmanalmaghrebi";
+  const avatarSrc = resolveAvatarUrl(profile.avatar_url);
   const avatarFallback = (profile.display_name || profile.username || "?").trim().charAt(0).toUpperCase();
 
   return (
@@ -59,9 +61,9 @@ export default async function UserPage({ params }: { params: Promise<{ username:
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center overflow-hidden text-2xl font-bold">
-              {profile.avatar_url ? (
+              {avatarSrc ? (
                 <img
-                  src={profile.avatar_url}
+                  src={avatarSrc}
                   alt={profile.display_name || profile.username}
                   className="h-full w-full object-cover"
                 />
