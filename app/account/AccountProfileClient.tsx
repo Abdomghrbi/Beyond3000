@@ -83,10 +83,6 @@ export default function AccountProfileClient({
             </button>
           </div>
 
-          <p className="mt-3 text-xs text-gray-500">
-            ارفع صورة مباشرة من جهازك بصيغة JPG أو PNG أو WebP.
-          </p>
-
           <form ref={uploadFormRef} action={uploadAvatar} encType="multipart/form-data" className="hidden">
             <input
               ref={fileInputRef}
@@ -120,8 +116,8 @@ export default function AccountProfileClient({
               <p className="mt-1 text-lg font-semibold text-gray-900 break-all">{email}</p>
             </div>
             <div className="rounded-2xl bg-white border border-gray-200 shadow-sm p-5">
-              <p className="text-sm text-gray-500">الحالة</p>
-              <p className="mt-1 text-lg font-semibold text-gray-900">مسجل دخول</p>
+              <p className="text-sm text-gray-500">حالة الحساب</p>
+              <p className="mt-1 text-lg font-semibold text-gray-900">نشِط</p>
             </div>
           </div>
 
