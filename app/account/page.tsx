@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import AuthSidebar from "../components/AuthSidebar";
@@ -50,7 +49,7 @@ export default async function AccountPage({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <AuthSidebar displayName={displayName} username={profile?.username} />
+      <AuthSidebar displayName={displayName} username={profile?.username ?? null} />
 
       <main className="mx-auto max-w-6xl px-4 py-16 md:px-6">
         <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 md:p-12">
@@ -58,23 +57,15 @@ export default async function AccountPage({
             <div>
               <h1 className="mt-2 text-3xl font-bold text-gray-900">معلومات الحساب</h1>
             </div>
-            {profile?.username && (
-              <Link
-                href={`/${profile.username}`}
-                className="rounded-xl border border-gray-300 bg-white px-5 py-3 font-medium text-gray-700 hover:border-gray-400 hover:bg-gray-50 transition"
-              >
-                عرض الصفحة العامة
-              </Link>
-            )}
           </div>
 
           <div className="mt-8">
             <AccountProfileClient
               profile={{
-                username: profile?.username,
-                display_name: profile?.display_name,
-                bio: profile?.bio,
-                avatar_url: profile?.avatar_url,
+                username: profile?.username ?? null,
+                display_name: profile?.display_name ?? null,
+                bio: profile?.bio ?? null,
+                avatar_url: profile?.avatar_url ?? null,
               }}
               email={user.email ?? null}
               savedMessage={savedMessage}
