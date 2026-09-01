@@ -110,7 +110,7 @@ export default function NewArticlePage() {
               disabled={loading}
               className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition disabled:opacity-50"
             >
-              {loading ? "جاري الحفظ..." : "نشر المقالة"}
+              {loading ? "جاري الحفظ..." : "نشر"}
             </button>
             <Link
               href="/dashboard"
