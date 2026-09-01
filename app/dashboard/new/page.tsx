@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { createArticle } from "../actions";
 import Link from "next/link";
-import AuthSidebar from "../../components/AuthSidebar";
 
 export default function NewArticlePage() {
   const [error, setError] = useState<string | null>(null);
@@ -21,23 +20,21 @@ export default function NewArticlePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <AuthSidebar displayName="لوحة التحكم" />
-
       <nav className="bg-white border-b border-gray-200 px-4 py-3">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-blue-600">
-            LinkedIn Articles
+            Beyond3000
           </Link>
           <Link href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900">
-            لوحة التحكم
+            رجوع للوحة التحكم
           </Link>
         </div>
       </nav>
 
-      <main className="max-w-3xl mx-auto px-4 py-8 pt-16">
+      <main className="max-w-3xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">مقالة جديدة</h1>
 
-        <form action={handleSubmit} className="space-y-4">
+        <form action={handleSubmit} className="space-y-6">
           {error && (
             <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">
               {error}
@@ -70,16 +67,37 @@ export default function NewArticlePage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              المحتوى *
-            </label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-sm font-medium text-gray-700">
+                المحتوى *
+              </label>
+              <span className="text-xs text-gray-400">يدعم Markdown</span>
+            </div>
             <textarea
               name="content"
               required
-              rows={15}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-y"
-              placeholder="اكتب مقالتك هنا..."
+              rows={18}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-y font-mono text-sm leading-relaxed"
+              placeholder={`## العنوان الفرعي
+
+اكتب نص الفقرة هنا. اترك سطر فارغ بين كل فقرة وفقرة.
+
+### عنوان أصغر
+
+- نقطة أولى
+- نقطة ثانية
+
+[رابط توضيحي](https://example.com)`}
             />
+            <div className="mt-2 bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-600 space-y-1">
+              <p className="font-bold text-gray-700 mb-1">تنسيق سريع:</p>
+              <p><code className="bg-gray-200 px-1 rounded">## نص</code> → عنوان فرعي</p>
+              <p><code className="bg-gray-200 px-1 rounded">### نص</code> → عنوان أصغر</p>
+              <p><code className="bg-gray-200 px-1 rounded">- نص</code> → قائمة نقطية</p>
+              <p><code className="bg-gray-200 px-1 rounded">**نص**</code> → <strong>عريض</strong></p>
+              <p><code className="bg-gray-200 px-1 rounded">[اسم](رابط)</code> → رابط</p>
+              <p>اترك <strong>سطر فارغ</strong> بين كل فقرة وفقرة</p>
+            </div>
           </div>
 
           <div className="flex items-center gap-2">
