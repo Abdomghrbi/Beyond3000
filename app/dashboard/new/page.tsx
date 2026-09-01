@@ -3,14 +3,22 @@
 import { useState } from "react";
 import { createArticle } from "../actions";
 import Link from "next/link";
+import CoverUploader from "./CoverUploader";
 
 export default function NewArticlePage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [coverUrl, setCoverUrl] = useState<string | null>(null);
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
     setError(null);
+
+  
+    if (coverUrl) {
+      formData.set("cover_image", coverUrl);
+    }
+
     const result = await createArticle(formData);
     if (result?.error) {
       setError(result.error);
@@ -54,17 +62,8 @@ export default function NewArticlePage() {
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              صورة الغلاف (رابط)
-            </label>
-            <input
-              name="cover_image"
-              type="url"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="https://example.com/image.jpg"
-            />
-          </div>
+        
+          <CoverUploader onUpload={setCoverUrl} />
 
           <div>
             <div className="flex items-center justify-between mb-1">
@@ -87,7 +86,6 @@ export default function NewArticlePage() {
               <p><code className="bg-gray-200 px-1 rounded">- نص..</code> → قائمة نقطية</p>
               <p><code className="bg-gray-200 px-1 rounded">**نص**</code> → <strong>عريض</strong></p>
               <p><code className="bg-gray-200 px-1 rounded">[مثال](رابط)</code> → رابط</p>
-    
             </div>
           </div>
 
