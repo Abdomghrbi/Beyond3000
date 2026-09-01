@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { signOutAction } from "./actions";
-import { Menu, X, Home, FileText, User, LogOut, ExternalLink } from "lucide-react";
+import { Menu, X, Home, FileText, User, LogOut, ExternalLink, Plus } from "lucide-react";
 
 export default function AuthSidebar({
   displayName,
@@ -13,6 +14,9 @@ export default function AuthSidebar({
   username?: string | null;
 }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isWritingPage = pathname === "/dashboard/new";
 
   useEffect(() => {
     if (open) {
@@ -61,16 +65,31 @@ export default function AuthSidebar({
               <p className="text-sm text-gray-500">مرحباً بك</p>
               <h2 className="mt-1 text-xl font-bold text-gray-900">{displayName}</h2>
               {username && <p className="text-sm text-gray-500 mt-1">@{username}</p>}
-              {username && (
-                <Link
-                  href={`/${username}`}
-                  onClick={() => setOpen(false)}
-                  className="mt-3 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-100"
-                >
-                  <ExternalLink size={14} />
-                  <span>عرض الصفحة العامة</span>
-                </Link>
-              )}
+              
+              {/* ✅ الأزرار الجديدة */}
+              <div className="mt-3 flex flex-wrap gap-2">
+                {username && (
+                  <Link
+                    href={`/${username}`}
+                    onClick={() => setOpen(false)}
+                    className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-100"
+                  >
+                    <ExternalLink size={14} />
+                    <span>عرض الصفحة العامة</span>
+                  </Link>
+                )}
+                
+                {!isWritingPage && (
+                  <Link
+                    href="/dashboard/new"
+                    onClick={() => setOpen(false)}
+                    className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3 py-2 text-xs font-semibold text-green-700 transition hover:bg-green-100"
+                  >
+                    <Plus size={14} />
+                    <span>كتابة جديدة</span>
+                  </Link>
+                )}
+              </div>
             </div>
 
             <button
