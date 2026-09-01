@@ -2,16 +2,10 @@ import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 import BottomActions from "./BottomActions";
-import { resolveAvatarUrl } from "@/lib/avatar";
-
-function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .substring(0, 60);
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ username: string; slug: string }> }): Promise<Metadata> {
   const { username, slug } = await params;
@@ -25,18 +19,15 @@ export async function generateMetadata({ params }: { params: Promise<{ username:
 
   if (!profile) return { title: "غير موجود" };
 
-  const { data: articles } = await supabase
+  const { data: article } = await supabase
     .from("articles")
     .select("*")
     .eq("user_id", profile.id)
+    .eq("slug", slug)
     .eq("published", true)
-    .order("created_at", { ascending: false });
-
-  const article = articles?.find((item) => (item.slug || generateSlug(item.title)) === slug);
+    .single();
 
   if (!article) return { title: "غير موجود" };
-
-  const articleSlug = article.slug || generateSlug(article.title);
 
   return {
     title: article.title,
@@ -45,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ username:
       title: article.title,
       description: article.excerpt,
       type: "article",
-      url: `https://beyond3000.vercel.app/${username}/${articleSlug}`,
+      url: `https://beyond3000.vercel.app/${username}/${slug}`,
       images: article.cover_image ? [{ url: article.cover_image }] : [],
       authors: [profile.display_name || profile.username],
       publishedTime: article.created_at,
@@ -71,21 +62,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
 
   if (!profile) notFound();
 
-  const { data: articles } = await supabase
+  const { data: article } = await supabase
     .from("articles")
     .select("*")
     .eq("user_id", profile.id)
+    .eq("slug", slug)
     .eq("published", true)
-    .order("created_at", { ascending: false });
-
-  const article = articles?.find((item) => (item.slug || generateSlug(item.title)) === slug);
+    .single();
 
   if (!article) notFound();
 
-  const articleSlug = article.slug || generateSlug(article.title);
-  const articleUrl = `https://beyond3000.vercel.app/${username}/${articleSlug}`;
-  const avatarSrc = resolveAvatarUrl(profile.avatar_url);
-  const avatarFallback = (profile.display_name || profile.username || "?").trim().charAt(0).toUpperCase();
+  const articleUrl = `https://beyond3000.vercel.app/${username}/${slug}`;
 
   return (
     <div className="min-h-screen bg-white">
@@ -117,16 +104,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
         </h1>
 
         <div className="flex items-center gap-3 mb-8 pb-8 border-b border-gray-100">
-          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center overflow-hidden text-lg font-bold">
-            {avatarSrc ? (
-              <img
-                src={avatarSrc}
-                alt={profile.display_name || profile.username}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <span>{avatarFallback}</span>
-            )}
+          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-lg font-bold">
+            {profile.display_name?.charAt(0) || profile.username.charAt(0)}
           </div>
           <div>
             <p className="font-medium text-gray-900">
@@ -142,11 +121,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
           </div>
         </div>
 
-        <div
-          className="prose prose-lg max-w-none text-gray-800 leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: article.content }}
-        />
-        
+        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+          <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+            {article.content}
+          </ReactMarkdown>
+        </div>
+
         <BottomActions url={articleUrl} />
       </article>
     </div>
