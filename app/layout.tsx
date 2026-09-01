@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Beyond3000 — اكتب وشارك مقالاتك",
-  description: "منصة لنشر المقالات الطويلة ومشاركتها على لينكدان بدون حدود",
+  description: "منصة لنشر المقالات الطويلة ومشاركتها على لينكدان بلا حدود",
 };
 
 export default function RootLayout({
