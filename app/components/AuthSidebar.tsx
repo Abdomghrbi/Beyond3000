@@ -66,7 +66,6 @@ export default function AuthSidebar({
               <h2 className="mt-1 text-xl font-bold text-gray-900">{displayName}</h2>
               {username && <p className="text-sm text-gray-500 mt-1">@{username}</p>}
               
-              {/* ✅ الأزرار الجديدة */}
               <div className="mt-3 flex flex-wrap gap-2">
                 {username && (
                   <Link
@@ -86,7 +85,7 @@ export default function AuthSidebar({
                     className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3 py-2 text-xs font-semibold text-green-700 transition hover:bg-green-100"
                   >
                     <Plus size={14} />
-                    <span>كتابة جديدة</span>
+                    <span>مقالة جديدة</span>
                   </Link>
                 )}
               </div>
