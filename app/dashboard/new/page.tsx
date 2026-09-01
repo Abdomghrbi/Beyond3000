@@ -39,7 +39,7 @@ export default function NewArticlePage() {
         </div>
       </nav>
 
-      <main className="max-w-3xl mx-auto px-4 py-8">
+      <main className="max-w-3xl mx-auto px-4 py-4">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">مقالة جديدة</h2>
 
         <form action={handleSubmit} className="space-y-6">
