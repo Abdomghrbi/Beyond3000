@@ -26,13 +26,13 @@ export default function NewArticlePage() {
             Beyond3000
           </Link>
           <Link href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900">
-            رجوع للوحة التحكم
+            لوحة التحكم
           </Link>
         </div>
       </nav>
 
       <main className="max-w-3xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">مقالة جديدة</h1>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">مقالة جديدة</h2>
 
         <form action={handleSubmit} className="space-y-6">
           {error && (
@@ -76,9 +76,9 @@ export default function NewArticlePage() {
             <textarea
               name="content"
               required
-              rows={18}
+              rows={15}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-y font-mono text-sm leading-relaxed"
-              placeholder={`اكتب ما تريد.`}
+              placeholder={`اكتب ما تريد..`}
             />
             <div className="mt-2 bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-600 space-y-1">
               <p className="font-bold text-gray-700 mb-1">تنسيق سريع:</p>
@@ -86,7 +86,7 @@ export default function NewArticlePage() {
               <p><code className="bg-gray-200 px-1 rounded">### نص..</code> → عنوان أصغر</p>
               <p><code className="bg-gray-200 px-1 rounded">- نص..</code> → قائمة نقطية</p>
               <p><code className="bg-gray-200 px-1 rounded">**نص**</code> → <strong>عريض</strong></p>
-              <p><code className="bg-gray-200 px-1 rounded">[اسم](رابط)</code> → رابط</p>
+              <p><code className="bg-gray-200 px-1 rounded">[مثال](رابط)</code> → رابط</p>
     
             </div>
           </div>
