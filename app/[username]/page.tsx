@@ -2,15 +2,6 @@ import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import CopyLinkButton from "../components/CopyLinkButton";
-import { resolveAvatarUrl } from "@/lib/avatar";
-
-function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .substring(0, 60);
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
@@ -33,16 +24,14 @@ export default async function UserPage({ params }: { params: Promise<{ username:
     notFound();
   }
 
+  const { data: { user } } = await supabase.auth.getUser();
+
   const { data: articles } = await supabase
     .from("articles")
     .select("*")
     .eq("user_id", profile.id)
     .eq("published", true)
     .order("created_at", { ascending: false });
-
-  const linkedinProfileUrl = "https://www.linkedin.com/in/abdullrahmanalmaghrebi";
-  const avatarSrc = resolveAvatarUrl(profile.avatar_url);
-  const avatarFallback = (profile.display_name || profile.username || "?").trim().charAt(0).toUpperCase();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -51,25 +40,24 @@ export default async function UserPage({ params }: { params: Promise<{ username:
           <Link href="/" className="text-xl font-bold text-blue-600">
             Beyond3000
           </Link>
-          <Link href="/login" className="text-sm text-gray-600 hover:text-gray-900">
-            تسجيل الدخول
-          </Link>
+          
+          {user ? (
+            <Link href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900">
+              لوحة التحكم
+            </Link>
+          ) : (
+            <Link href="/login" className="text-sm text-gray-600 hover:text-gray-900">
+              تسجيل الدخول
+            </Link>
+          )}
         </div>
       </nav>
 
       <main className="max-w-3xl mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center overflow-hidden text-2xl font-bold">
-              {avatarSrc ? (
-                <img
-                  src={avatarSrc}
-                  alt={profile.display_name || profile.username}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <span>{avatarFallback}</span>
-              )}
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-2xl font-bold">
+              {profile.display_name?.charAt(0) || profile.username.charAt(0)}
             </div>
             <div>
               <h1 className="text-2xl font-bold text-gray-900">
@@ -88,22 +76,21 @@ export default async function UserPage({ params }: { params: Promise<{ username:
         {articles && articles.length > 0 ? (
           <div className="space-y-4">
             {articles.map((article) => {
-              const articleSlug = article.slug || generateSlug(article.title);
-              const articleUrl = `https://beyond3000.vercel.app/${profile.username}/${articleSlug}`;
+              const articleUrl = `https://beyond3000.vercel.app/${profile.username}/${article.slug}`;
               return (
                 <div
                   key={article.id}
                   className="bg-white rounded-xl shadow-sm border border-gray-100 p-5"
                 >
                   <Link
-                    href={`/${profile.username}/${articleSlug}`}
+                    href={`/${profile.username}/${article.slug}`}
                     className="block hover:opacity-90 transition"
                   >
                     {article.cover_image && (
                       <img
                         src={article.cover_image}
                         alt={article.title}
-                        className="w-full h-40 object-cover rounded-lg mb-4"
+                        className="w-full h-48 object-cover rounded-lg mb-4"
                       />
                     )}
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -120,12 +107,12 @@ export default async function UserPage({ params }: { params: Promise<{ username:
                     <div className="flex items-center gap-3">
                       <CopyLinkButton url={articleUrl} />
                       <a
-                        href={linkedinProfileUrl}
+                        href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-blue-600 hover:text-blue-700 font-medium"
                       >
-                        اقترح تعديلاً
+                        LinkedIn
                       </a>
                     </div>
                   </div>
