@@ -16,7 +16,7 @@ export default function AuthSidebar({
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  const isWritingPage = pathname === "/dashboard/new";
+  const isWritingPage = pathname === "/dashboard";
 
   useEffect(() => {
     if (open) {
