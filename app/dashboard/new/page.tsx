@@ -78,25 +78,16 @@ export default function NewArticlePage() {
               required
               rows={18}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-y font-mono text-sm leading-relaxed"
-              placeholder={`## العنوان الفرعي
-
-اكتب نص الفقرة هنا. اترك سطر فارغ بين كل فقرة وفقرة.
-
-### عنوان أصغر
-
-- نقطة أولى
-- نقطة ثانية
-
-[رابط توضيحي](https://example.com)`}
+              placeholder={`اكتب ما تريد.`}
             />
             <div className="mt-2 bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-600 space-y-1">
               <p className="font-bold text-gray-700 mb-1">تنسيق سريع:</p>
-              <p><code className="bg-gray-200 px-1 rounded">## نص</code> → عنوان فرعي</p>
-              <p><code className="bg-gray-200 px-1 rounded">### نص</code> → عنوان أصغر</p>
-              <p><code className="bg-gray-200 px-1 rounded">- نص</code> → قائمة نقطية</p>
+              <p><code className="bg-gray-200 px-1 rounded">## نص..</code> → عنوان فرعي</p>
+              <p><code className="bg-gray-200 px-1 rounded">### نص..</code> → عنوان أصغر</p>
+              <p><code className="bg-gray-200 px-1 rounded">- نص..</code> → قائمة نقطية</p>
               <p><code className="bg-gray-200 px-1 rounded">**نص**</code> → <strong>عريض</strong></p>
               <p><code className="bg-gray-200 px-1 rounded">[اسم](رابط)</code> → رابط</p>
-              <p>اترك <strong>سطر فارغ</strong> بين كل فقرة وفقرة</p>
+    
             </div>
           </div>
 
@@ -109,7 +100,7 @@ export default function NewArticlePage() {
               defaultChecked
             />
             <label htmlFor="published" className="text-sm text-gray-700">
-              نشر المقالة فوراً
+              نشر الآن
             </label>
           </div>
 
