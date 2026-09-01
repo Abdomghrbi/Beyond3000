@@ -4,11 +4,21 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
 function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
+  
+  let slug = title
+    .trim()
+    .replace(/[\u064B-\u065F\u0670\u0640]/g, "")
+    .replace(/[^\u0600-\u06FF\u0750-\u077Fa-zA-Z0-9\s-]/g, "")
     .replace(/\s+/g, "-")
+    .replace(/-+/g, "-") 
+    .replace(/^-|-$/g, "") 
     .substring(0, 60);
+  
+  if (!slug) {
+    slug = "maqal-" + Math.random().toString(36).slice(2, 8);
+  }
+
+  return slug;
 }
 
 export async function createArticle(formData: FormData) {
@@ -25,7 +35,12 @@ export async function createArticle(formData: FormData) {
   const published = formData.get("published") === "on";
 
   const slug = generateSlug(title);
-  const excerpt = content.replace(/<[^>]*>/g, "").substring(0, 150) + "...";
+  
+  const excerpt = content
+    .replace(/[#*_`\[\]\(\)!]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .substring(0, 150) + "...";
 
   const { error } = await supabase.from("articles").insert({
     user_id: user.id,
