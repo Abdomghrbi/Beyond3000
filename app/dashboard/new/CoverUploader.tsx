@@ -96,13 +96,11 @@ function cropToAspect(file: File, aspect: number): Promise<Blob> {
       let cropWidth: number, cropHeight: number, startX: number, startY: number;
 
       if (currentAspect > aspect) {
-      
         cropHeight = height;
         cropWidth = height * aspect;
         startX = (width - cropWidth) / 2;
         startY = 0;
       } else {
-      
         cropWidth = width;
         cropHeight = width / aspect;
         startX = 0;
@@ -122,6 +120,7 @@ function cropToAspect(file: File, aspect: number): Promise<Blob> {
     img.onerror = () => reject(new Error("Failed to load image"));
     img.src = URL.createObjectURL(file);
   });
+}
 
 async function uploadToSupabase(blob: Blob): Promise<string> {
   const supabase = createClient();
@@ -145,4 +144,4 @@ async function uploadToSupabase(blob: Blob): Promise<string> {
     .getPublicUrl(fileName);
 
   return publicUrl;
-        }
+}
