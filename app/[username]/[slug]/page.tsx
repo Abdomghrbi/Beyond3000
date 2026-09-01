@@ -76,6 +76,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Navbar */}
       <nav className="border-b border-gray-200 px-4 py-3 sticky top-0 bg-white/95 backdrop-blur z-10">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-blue-600">
@@ -83,32 +84,35 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
           </Link>
           <Link
             href={`/${profile.username}`}
-            className="text-sm text-gray-600 hover:text-gray-900"
+            className="text-sm text-gray-600 hover:text-gray-900 truncate max-w-[120px]"
           >
             @{profile.username}
           </Link>
         </div>
       </nav>
 
-      <article className="max-w-3xl mx-auto px-4 py-8">
+      <article className="max-w-3xl mx-auto px-4 py-6 md:py-8">
+        {/* Cover Image */}
         {article.cover_image && (
           <img
             src={article.cover_image}
             alt={article.title}
-            className="w-full h-64 md:h-80 object-cover rounded-2xl mb-8"
+            className="w-full h-48 sm:h-64 md:h-80 object-cover rounded-xl md:rounded-2xl mb-6 md:mb-8"
           />
         )}
 
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+        {/* Title */}
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight break-words">
           {article.title}
         </h1>
 
-        <div className="flex items-center gap-3 mb-8 pb-8 border-b border-gray-100">
-          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-lg font-bold">
+        {/* Author */}
+        <div className="flex items-center gap-3 mb-6 md:mb-8 pb-6 border-b border-gray-100">
+          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-lg font-bold shrink-0">
             {profile.display_name?.charAt(0) || profile.username.charAt(0)}
           </div>
-          <div>
-            <p className="font-medium text-gray-900">
+          <div className="min-w-0">
+            <p className="font-medium text-gray-900 truncate">
               {profile.display_name || profile.username}
             </p>
             <p className="text-sm text-gray-500">
@@ -121,7 +125,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
           </div>
         </div>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        {/* Content - Markdown */}
+        <div className="article-content text-gray-800 leading-relaxed break-words">
           <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
             {article.content}
           </ReactMarkdown>
