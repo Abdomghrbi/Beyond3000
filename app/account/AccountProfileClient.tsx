@@ -106,7 +106,7 @@ export default function AccountProfileClient({
     
           <div
             onClick={handleAvatarClick}
-            className="mx-auto flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-gray-100 ring-2 ring-blue-500 ring-offset-2 ring-offset-white cursor-pointer transition hover:ring-blue-400"
+            className="mx-auto flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-gray-100 ring-3 ring-blue-500 ring-offset-2 ring-offset-white cursor-pointer transition hover:ring-blue-400"
           >
             {avatarSrc ? (
               <img
