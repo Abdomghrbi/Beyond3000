@@ -219,10 +219,9 @@ export default function AccountProfileClient({
             </div>
           )}
 
-          <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-6">
-            <div className="flex items-center justify-between gap-3">
+          <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-4">
+            <div className="flex items-center justify-between gap-2">
               <div>
-                <h2 className="text-xl font-bold text-gray-900">تعديل الملف الشخصي</h2>
               
               </div>
               <button
