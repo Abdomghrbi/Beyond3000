@@ -51,7 +51,8 @@ export async function generateMetadata({ params }: { params: Promise<{ username:
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ username: string; slug: string }> }) {
-  const { username, slug } = await params;
+  const { username, slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug); 
   const supabase = await createClient();
 
   const { data: profile } = await supabase
