@@ -191,7 +191,7 @@ export default function AccountProfileClient({
         <section className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-2xl bg-white border border-gray-200 shadow-sm p-5">
-              <p className="text-sm text-gray-500">الاسم الظاهر</p>
+              <p className="text-sm text-gray-500">الاسم</p>
               <p className="mt-1 text-lg font-semibold text-gray-900">
                 {profile.display_name || "غير محدد"}
               </p>
@@ -214,7 +214,7 @@ export default function AccountProfileClient({
 
           {profile.bio && (
             <div className="rounded-2xl bg-white border border-gray-200 shadow-sm p-5">
-              <p className="text-sm text-gray-500">Bio</p>
+              <p className="text-sm text-gray-500">نبذة</p>
               <p className="mt-2 text-gray-700 leading-relaxed">{profile.bio}</p>
             </div>
           )}
