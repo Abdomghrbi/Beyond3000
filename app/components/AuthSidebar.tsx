@@ -82,7 +82,7 @@ export default function AuthSidebar({
                   <Link
                     href="/dashboard/new"
                     onClick={() => setOpen(false)}
-                    className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3 py-2 text-xs font-semibold text-green-700 transition hover:bg-green-100"
+                    className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-3 py-2 text-xs font-semibold text-black-700 transition hover:bg-green-100"
                   >
                     <Plus size={14} />
                     <span>مقالة جديدة</span>
